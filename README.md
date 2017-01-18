@@ -11,4 +11,4 @@ The stages of development were:
 - Some modifications while using it in daily/weekly work for about 4 months
 - 1 week of modularizing and adding new desired functionalities
 - Continuous use of the program with some modifications for over 6 more months.
-This development process structured by ad hoc requirements has affected both the structure and the readability of the code. Especially as it was never intended for others eyes.
+This development process structured by ad hoc requirements has affected both the structure and the readability of the code. Especially as it was never intended for others' eyes.
