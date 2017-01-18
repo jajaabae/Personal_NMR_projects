@@ -1,0 +1,3 @@
+spectra_dir	S:\fileFolder_128GB\Thesis_collected\NMR_DATA\MC1037_eff\forTesting_SelectionOf_AW_wash_MC1037_onS\instrument\data\jajaabae\nmr\20160701_Restart_Selec_AW_wash_MC1037
+
+

@@ -1,0 +1,154 @@
+"""
+##################################
+############# CBOMSE #############
+##################################
+# Title: ComputerBased Organization of Molecular Structre Elucidation (CBOMSE)
+# 
+# Description:
+#       The program gives a visual representation of the data gathered by picking peaks in NMR spectra. (Currently limited to COSY and HSQC data, but still it structuarly accurate provides the presentation of the fragments of the molecule).
+# Description(NO):
+#       Program som visuelt fremstiller korrelasjonsdata fra NMR-spektre i form av fragmenter med korrelasjoner representert av bindinger og andre korrelasjons-linjer.
+#       Har laget et program som ved visuell representasjon av korrelasjonsdata, forenkler strukturbestemmelse av molekyler.
+#
+# PS: The time spendt in the initial period of 2016.feb.18 - 2016.feb.25, on creatin the first milestone of this program (When it was made to be very helpful in structure elucidation), was strongly limited by the time spendt on my "daytime project" at the time.
+# (the period from start of making the program and untill the program could use the COSY and HSQC data to produce a correlation-based illustration of (visualy) isolated fragments of a micrcystein that I had started the elucidation process on, at the time).
+# 
+# 
+# 
+# 
+# 
+# 
+# The Concept:
+#   ****While in Australa****
+#       The concept was created and developed during my ca. 6 months stay abroad over the corse of a subject of organic chemistry with a focus of molecular elucidation from spectroscopic data.
+#       The concept of how to make the process of elucidating molecules from NMR data, tremendously more easily, effectively, less proun to errors from "random mistakes" (when manually moving and writing data) and less proun to conceptual errors as the data will be displayed in a visually intuetively understandable way, while the whole set of data is vissible at the same time. By an interactive GUI ((G.) User Interface), the input to the elucidation data by the user will be less proun to errors (/"random mistakes").
+#   ***until the start of master***
+#       Some shaping of the concept and (relatively to my experience with NMR at the time,) a lot of searching for NMR programs that could perform some of the tasks I would need the program to performe.
+#           There were almost no encurraging results to find if anyone had made programs that could do what I wanted of an NMR software (in regards to structure elucidation).
+#   Beginning of 2016.jan:
+#       Finding that TopSpin:CMCse (opposed to TopSpin:CMC-assist) had incoorperated a way to do the folowing in a good way:
+#           1 - Easily assign H-atoms and C-atoms to ppm-values directly from the spectra displayed in TopSpin.
+#                   #Note: The added option for a shorter number of button-presses to add a ppm-value, would make this stage more effective.
+#           2 - Easily assign correlations to a table (a table based on the assigned ppm-values).
+#                   #Note: To add a correlation in TopSpin:CMCse, one clicks on a correlation in the spectrum, and if the program recognizes which cell in the table, the peak belongs in, the cell "lights up"/is marked by the program.
+#                               In f.ex. the COSY spectrum: When I have clicked the peak and TopSpin:CMCse has rechognized the apropriate cell, to assign the correlation, (according to my knowledge of TopSpin:CMCse,) I have to move the cursor from the spectrum window, to the table window, right-click on the highlighted cell, move the cursor down to which correlation I want listed in the table.
+#                               What should be an option is, when the cell has been highlighted, I can press a letter for the correlation, and it should appair in the hoghlighted cell. (In TopSpin:CMCse, this might not have been implememted due to the need for typin to be inturpered as commands for other use).
+#   2016.feb.18:
+#       While explaning why I thoght that it was "conseptually" easy ("easy code" relative to "normal" programs.) to make a program that greatly effectivised the process/work-flow when elucidating molecules, I visualized exactly what was needed of code to visualize the correlation tables from TopSpin:CMCse, in the chemistry program ChemDraw.
+#           Within 3.5 hours after the conversation, I had a working prototype which "ilustrates the correlations in the form of the molecule".
+# 
+# 
+# 
+# 
+# ### The Birth of the Program: ###
+# Description:
+#       The program gives a visual representation of the data gathered by picking peaks in NMR spectra. (Currently limited to COSY and HSQC data, but still it structuarly accurate provides the presentation of the fragments of the molecule).
+#
+# part 01: proof of concept.
+#   At: 2016.feb.18.
+#       In 3.5 hours, I made a 74 lines long program that reads a tab-delimited text file that contains a table format of an (NMR) COSY spectrum.
+#       The program reads the COSY data and creates a file that is readable by ChemDraw Professional 15.0.
+#       The .cdxml file contains all hydrogens from the COSY table (with random coordinates), and for every COSY correlation, a "bond" is assigned for the cdxml format.
+#       Output of the program is a .cdxml file that can be red and structurely optimized by ChemDraw.
+#       The result after the optimization is a "structure" of cosy-correlated hydrogens.
+#       The relult is a visualization of the COSY data in an intuetively understanable format.
+#       This is a proof of concept to my long hold belief, that the process of NMR elucidation can be made a lot easier by a better interface/program to handle and visualize the NMR data.
+#           The longer goal is an interactive tool to handle and display NMKR data in an organized and intuetively fashion.
+#           A missconseption would be to think that I try to make a program that will try to solve the chemical structure. It will presend the data and will only use "assumptions" to organize the display of a set of data, but the representation may look closer to the molecule of the data, the more the program evolves.
+# 
+# part 02: Adding HSQC data.
+#   Within: 2016.feb.18 - 2016.feb.25.
+#       #pseudo-CODE!:
+#                   For every HSQC correlation, add a HSQC-"bond" between the H and the C from the HSQC correlation-"data".
+# 
+# part 03: Moving the representation of COSY correlation to the C-atoms.
+#   Within: 2016.feb.18 - 2016.feb.25.
+#       #pseudo-CODE!:
+#                   For every COSY-correlation:
+#                       If both Hydrogens has a C-atom: 
+#                           Add a COSY-"bond" between the C-atoms.
+#       #NB: This function needs to handle the the case "if an H is assigned to two C-atoms". The solution is to add a correlation from both C-atoms to the hetro-atom where the H correlates to. This will make it visible that one H is assigned to C-atoms, and (in many instances) show ("visually") which C-atom does not fit according to other correlations.
+# 
+# 
+# part 04: Making the program support directly reading the save-file of TopSpin:CMCse.
+#   Ca: 2016.feb.23 - 2016.feb.24.
+# 
+# 
+# part 05: Re-instating the representation of COSY correlations that cannot be representated through a none-H-containing-bond/correlation.
+#   Within: 2016.feb.18 - 2016.feb.25.
+#       #pseudo-CODE!:
+#                   For every COSY-correlation where each of the H-atoms does not have a C-atom different to the other, or if at least one of them does not have a c-atom:
+#                       Add a "COSY"-"bond".
+#        #Check what implications a H with two Carbons, has on this function.
+#       
+# 
+# Writing this note into the program in an organized way and as chronologically accurate as possible.
+#   Performed at: 2016.feb.25.
+# 
+#####
+# 
+# 
+# ### Second iteration: *** ###
+# 
+#  
+#  
+#  
+#  
+#  
+###################################
+#  
+#  
+# 
+# Plan for next parts:
+#   Grouping the atoms in groups correlated atoms, where the atoms are directly or indirectly correlated through COSY and HSQC-correlations.
+#       These groups can be used to write different fragments onto different areas, so they are not displayed ontop of eachother (before and) after structural optimization.
+#   Adding suport for HMBC data.
+#       This data will give
+#   Adding support for TOCSY data.
+#       Generating TOCSY-list for each hydrogen, to better match TOCSY data of neighbours.
+#       Adding a "bond"/"correlation" to any correlated H-atom that is not in the (non-specifically created) COSY-group. Any correlations that for some reason may show up in a TOCSY spectrum, but is not visible through a "COSY walk" in the chosen COSY spectrum(s) will then be represented.
+#   Print data onto Atoms:
+#       - Tocsy-group-list for H (== TOCSY correlations)
+#       - ppm values.
+#   Re-enable the support for tab-delimited files.
+# 
+#"""
+
+
+
+
+
+"""
+## Title elucidation ##
+CBOMSE      ComputerBased Organization of Molecular Structre Elucidation
+DOSE        Databased Organic Structre Elucidation (DOSE)/(D.O.S.E.)
+    #note: Is "D.O.S.E." easier to search in google, or is it understood as "dose".
+COSEoOC
+ComputerBased Organization (and visualization) of (Molecular) Structre Elucidation
+(mainly from NMR-data)
+
+## Old titles ##
+DOS     Databased Organic Structure-elucidation
+#"""
+
+
+
+
+"""
+## Notes: ##
+Correlations: "Electron Pushing Tool from the Chemical Symbols toolbar."
+Look for how to make an arrow hit the border of a node, instead of the center.
+#"""
+
+
+"""
+For group in toxy-groups:
+    for all hydrogens in group:
+        makeStructure()
+Recursive (if none group name):
+    Lable, and Recurse all neighbors. 
+"""
+
+"""
+() Over 1.5k lines per 20160708
+"""

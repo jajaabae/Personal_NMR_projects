@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<a href="/">home</a>
+<title>"plotter.htm"</title>
+
+
+</head>
+
+<body>
+<h1>Plotter</h1>
+
+<table style="width:100%">
+	<tr>
+	<th  align="left", style="width:25%">
+		<form action="/plotter/" method="POST">
+			
+			<input type="submit" value="Submit">
+			<br/>
+			<br/>
+			
+			<b>Choose data type to plot:</b>
+			<br/>
+			<input type="radio" name="data_type" value="1" checked>CO2</input>
+			<br/>
+			<input type="radio" name="data_type" value="2">Temperature</input>
+			<br/>
+			<br/>
+			
+			<b>Data representation method:</b>
+			<br/>
+			<input type="radio" name="data_representation_method" value="1" checked>CO2/Y (CO2)</input>
+			<br/>
+			<input type="radio" name="data_representation_method" value="2">12 months/Y</input>
+			<br/>
+			<input type="radio" name="data_representation_method" value="3">sum(months)/Y</input>
+			<br/>
+			<input type="radio" name="data_representation_method" value="3">monthly/"Y/12"</input>
+			<br/>
+			<br/>
+			
+			<b>Area to plot:</b>
+			<br>
+			X min:
+			<input type="text" name="x_min">
+			<br>
+			X max:
+			<input type="text" name="x_max">
+			<br>
+			
+			Y min:
+			<input type="text" name="y_min">
+			<br>
+			Y max:
+			<input type="text" name="y_max">
+			<br>
+		</form>
+	</th>
+	
+	<th>
+	{% if hasdata %}
+	<img src="{{url_for('static',filename=pictureName)}}" alt="{{pictureName}}" border=0 height=400 width=400></img>
+	{% endif %}
+	{% if not hasdata %}
+	<img src="{{url_for('static',filename='test.png')}}" alt="'test.png'" border=0 height=400 width=400></img>
+	{% endif %}
+	</th>
+	</tr>
+	
+</table>
+
+{% if hasdata %}
+<p style="color:red">
+{{ data_type }}
+<br>
+{{ data_representation_method }}
+<br>
+{{ x_min }}
+<br>
+{{ x_max }}
+<br>
+{{ y_min }}
+<br>
+{{ y_max }}
+</p>
+{% endif %}
+
+
+
+</body>
+</html>

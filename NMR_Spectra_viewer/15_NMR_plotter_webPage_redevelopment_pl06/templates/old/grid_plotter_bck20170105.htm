@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>"Grid_plotter.htm"</title>
+</head>
+
+<body>
+
+<table style="width:100%">
+	<tr>
+	<th  align="left", style="width:25%">
+<a href="/">home</a></br>
+<a href="/grid_plotter?spec_type=TOCSY">plot TOCSY</a></br>
+<a href="/grid_plotter?spec_type=COSY">plot COSY</a></br>
+<a href="/grid_plotter?spec_type=ROESY">plot ROESY</a></br>
+<a href="/grid_plotter?spec_type=NOESY">plot NOESY</a></br>
+<h1>Grid plotter: {{ spec_type }}</h1>
+	
+		<form action="/grid_plotter?spec_type={{ spec_type }}" method="POST">
+			
+			<input type="submit" value="Submit">
+			<br/>
+			<br/>
+			
+
+			<b>Provided ppms:</b>
+			<br/>
+			<input type="radio" name="datalists" value="1" {% if datalists =="1" or not datalists =="2" %}checked{% endif %}>permutations of one input list combined with itself</input>
+			<br>
+			<input type="radio" name="datalists" value="2" {% if datalists =="2" %}checked{% endif %}>combinations of two input lists</input>
+			<br>
+			<br>
+			
+			<b>ppms:</b>
+			<br>
+			X list:
+			<input type="text" name="x_list" value="{{ x_list }}">
+			<br>
+			Y list:
+			<input type="text" name="y_list" value="{{ y_list }}">
+			<br>
+			<br>
+			
+			
+			<b>Plot Area for each Peak:</b>
+			<br>
+			X diameter:
+			<input type="text" name="x_diameter"  value="{{ x_diameter }}">
+			<br>
+			Y diameter:
+			<input type="text" name="y_diameter"  value="{{ y_diameter }}">
+			<br>
+			<br>
+			
+			<b>Intensity multiplication number:</b>
+			<br>
+			N:
+			<input type="text" name="intensity_multiplication_variable"  value="{{ intensity_multiplication_variable }}">
+			
+		</form>
+		
+		{% if hasdata %}
+		<p style="color:red">
+		<br>
+		{{ datalists }}
+		<br>
+		{{ x_list }}
+		<br>
+		{{ y_list }}
+		<br>
+		{{ x_diameter }}
+		<br>
+		{{ y_diameter }}
+		<br>
+		</p>
+		{% endif %}
+	</th>
+	
+	<th>
+	{% if hasdata %}
+	<img src="{{url_for('static',filename=pictureName2)}}" alt="{{pictureName2}}" border=0 height=400 width=400></img>
+	<img src="{{url_for('static',filename=pictureName)}}" alt="{{pictureName}}" border=0 height=400 width=400></img>
+	{% endif %}
+	{% if not hasdata %}
+	<img src="{{url_for('static',filename='test.png')}}" alt="'test.png'" border=0 height=400 width=400></img>
+	{% endif %}
+	</th>
+	</tr>
+	
+</table>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>"plotter.htm"</title>
+
+
+</head>
+
+<body>
+<a href="/">home</a>
+<h1>Plotter for CO2 per cuntry</h1>
+<h2>(Be patient when waiting for result (few seconds))</h2>
+
+<table style="width:100%">
+	<tr>
+	<th  align="left", style="width:25%">
+		<form action="/CO2_plotter_for_cuntries/" method="POST">
+			
+			<input type="submit" value="Submit">
+			<br/>
+			<br/>
+			
+
+			<b>Data representation method:</b>
+			<br/>
+			<input type="radio" name="data_representation_method" value="1" checked>CO2/inhabitant (from the latest reported value)</input>
+			<br>
+			<br>
+			
+			<b>Area to plot:</b>
+			<br>
+			X min:
+			<input type="text" name="x_min">
+			<br>
+			X max:
+			<input type="text" name="x_max">
+			<br>
+			
+			Include None data, and set it to a value to make them stand out (f.ex. 200):
+			<input type="text" name="y_min">
+			<br>
+
+		</form>
+		
+		{% if hasdata %}
+		<p style="color:red">
+		{{ data_type }}
+		<br>
+		{{ data_representation_method }}
+		<br>
+		{{ x_min }}
+		<br>
+		{{ x_max }}
+		<br>
+		{{ y_min }}
+		</p>
+		{% endif %}
+	</th>
+	
+	<th>
+	{% if hasdata %}
+	<img src="{{url_for('static',filename=pictureName)}}" alt="{{pictureName}}" border=0 height=1600 width=400></img>
+	{% endif %}
+	{% if not hasdata %}
+	<img src="{{url_for('static',filename='test.png')}}" alt="'test.png'" border=0 height=400 width=400></img>
+	{% endif %}
+	</th>
+	</tr>
+	
+</table>
+
+
+
+
+
+</body>
+</html>

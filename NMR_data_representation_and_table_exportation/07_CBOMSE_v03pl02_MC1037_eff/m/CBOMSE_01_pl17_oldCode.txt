@@ -1,0 +1,157 @@
+"""
+BoundingBox="4.35 3.90 517.29 766.65"
+CDBoundingBox=BoundingBox
+CDBoundingBox=CDBoundingBox.split(' ')
+CDPageX = [float(CDBoundingBox[0]), float(CDBoundingBox[2])]
+CDPageY = [float(CDBoundingBox[1]), float(CDBoundingBox[3])]
+#"""
+
+
+
+
+""" ###  ###
+Hydrogens = []
+Carbons = []
+#CorCOSY = []
+correlations = []
+#corHSQC = []
+global Bonds
+Bonds = []
+prelimBonds = []
+groups = []
+
+
+
+
+
+
+
+
+def addH(names):
+    for n in names:
+        n=HPrefix+n
+        if n not in Hydrogens:
+            Hydrogens.append(n)
+def addC(names):
+    for n in names:
+        n=CPrefix+n
+        if n not in Carbons:
+            Carbons.append(n)
+
+def addCor(nx, ny, corLetter):
+    cor = [nx, ny, corLetter]
+    correlations.append(cor)
+def getCorTouples(xNames, yNames, mat, corLetter):
+    if corLetter == 'c':
+        atomTypeX=HPrefix
+        atomTypeY=HPrefix
+    elif corLetter == 'q':
+        atomTypeX=HPrefix
+        atomTypeY=CPrefix
+    for ny, row in zip(yNames, mat):
+        #print ny,row
+        for nx, cell in zip(xNames, row):
+            if corLetter in cell:
+                addCor(atomTypeX+nx, atomTypeY+ny, corLetter)
+                #addCor(nx, ny, corLetter)
+                #print nx, ny, corLetter
+
+def readMatrixFile(fileName, corLetter):
+    f=open(fileName)
+    data = f.readlines()
+    f.close()
+    matrix = []
+    for l in data:
+        row = []
+        for cell in l.replace('\n', '').replace(' \r', '').split('\t'):
+            row+=[cell]
+        matrix.append(row)
+    matName = matrix[0][0]
+    xNames = matrix[0][1:]
+    yNames = []
+    for row in matrix[1:]:
+        yNames+=[row[0]]
+    mat = []
+    for row in matrix[1:]:
+        mat.append(row[1:])
+    corTouples = getCorTouples(xNames, yNames, mat, corLetter)
+    return matName, xNames, yNames
+
+def getCOSY():
+    corLetter = 'c'
+    [matName, xNames, yNames] = readMatrixFile('COSY.txt', corLetter)
+    if not xNames == yNames:
+        print 'Cosy error'
+    addH(xNames)
+    addH(yNames) #(redundant)
+    #print matName, xNames, yNames
+    
+def getHSQC():
+    corLetter = 'q'
+    [matName, xNames, yNames] = readMatrixFile('HSQC.txt', corLetter)#TEST
+    if xNames == yNames:
+        print 'H-C-error'
+    addH(xNames)
+    addC(yNames)
+    #print matName, xNames, yNames
+
+getCOSY()
+getHSQC()
+#"""
+
+
+
+
+"""
+if CMCse:
+ correlations = getBonds()
+ Hydrogens = getHSimple()
+ Hydrogens = set(Hydrogens)
+ Hydrogens = [value for value in Hydrogens if value != '']
+ Carbons = getCarbonsSimple()
+ #print Carbons
+ Carbons = set(Carbons)
+ Carbons = [v for v in Carbons if v != '']
+#"""
+"""
+CMCse=True
+
+if CMCse:
+ from fun_readCMCse04_forPL07 import getBonds
+ from fun_readCMCse04_forPL07 import getHSimple
+ from fun_readCMCse04_forPL07 import getCarbonsSimple
+ from fun_readCMCse04_forPL07 import getAtomData
+ 
+ correlations = getBonds()
+ Hydrogens = getHSimple()
+ Hydrogens = set(Hydrogens)
+ Hydrogens = [value for value in Hydrogens if value != '']
+ Carbons = getCarbonsSimple()
+ #print Carbons
+ Carbons = set(Carbons)
+ Carbons = [v for v in Carbons if v != '']
+ global atomData
+ atomData = getAtomData()
+#"""
+"""
+print Hydrogens
+print 
+print Carbons
+print 
+print atomData
+#"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
