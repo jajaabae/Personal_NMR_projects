@@ -1,5 +1,7 @@
 These two projects have been made with only the focus of making the tools quickly. This has resulted in two NMR-tools which have been extremely helpful in my Master's Thesis, but the code has a lower-than-ideal degree of readability.
 
+I have included some representative .png files in the main folder of each project.
+
 # NMR_Spectra_viewer
 This project is made to display grids of spectra slices. It was developed during some more than a weekend, and later improved for visual experience as I got approval to include the output in my thesis.
 
