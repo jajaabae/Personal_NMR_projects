@@ -13,7 +13,7 @@ The stages of development were:
 - Continuous use of the program with some modifications for over 6 more months.
 This development process structured by ad hoc requirements has affected both the structure and the readability of the code. Especially as it was never intended for others' eyes.
 
-# Youtube
+# On YouTube
 I have made a YouTube video explaining the background for these programs and how they work in tandem with some commercially available NMR software.
 I recommend to view from the Time-lapse (5:42) or conclusion part (9:54) of the video as it otherwise is a bit long for the format.
 Time-lapse for the programs in use: https://youtu.be/TBabueDNDVc?t=5m42s
