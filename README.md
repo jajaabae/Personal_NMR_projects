@@ -3,6 +3,7 @@ Some other artefacts of the chosen development strategies are:
 - Almost no comments
 - Redundant code commented out for safety. (Only removed several versions later when I know it is not needed).
 - In order to not touch working code, code has been copied instead of generalized.
+- Almost no optimization of code by the principle of "leave it if it works".
 
 I have included some representative .png files in the main folder of each of the two projects.
 
