@@ -1,4 +1,8 @@
 These two projects have been made with only the focus of making the tools quickly. This has resulted in two NMR-tools which have been extremely helpful in my Master's Thesis, but the code has a lower-than-ideal degree of readability.
+Some other artefacts of the chosen development strategies are:
+- Almost no comments
+- Redundant code commented out for safety. (Only removed several versions later when I know it is not needed).
+- In order to not touch working code, code has been copied instead of generalized.
 
 I have included some representative .png files in the main folder of each of the two projects.
 
